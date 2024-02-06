@@ -1,6 +1,13 @@
-using Elasticsearch.Net;
-using Nest;
+using AutoMapper;
 using ElasticSearch.API.Extensions;
+using ElasticSearch.AppCore.Mapping;
+using ElasticSearch.BLL.Abstract;
+using ElasticSearch.BLL.Concrate;
+using ElasticSearch.DAL.Repositories.Derived;
+using ElasticSearch.DAL.Repositories.Infrastructor;
+using Microsoft.AspNetCore.DataProtection.KeyManagement;
+using Microsoft.AspNetCore.Identity;
+using Nest;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +18,25 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddElastic(builder.Configuration);
+
+#region MappingConfiguration
+
+builder.Services.AddAutoMapper(typeof(Program));
+var mapperConfig = new MapperConfiguration(mc =>
+{
+    mc.AddProfile(new MapProfile());
+});
+IMapper mapper = mapperConfig.CreateMapper();
+builder.Services.AddSingleton(mapper);
+#endregion
+
+#region IoC
+
+builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddSingleton<IElasticClient, ElasticClient>();
+
+#endregion
 
 var app = builder.Build();
 

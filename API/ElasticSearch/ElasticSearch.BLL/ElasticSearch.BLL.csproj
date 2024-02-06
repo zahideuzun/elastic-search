@@ -7,11 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="NEST" Version="7.17.5" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\ElasticSearch.AppCore\ElasticSearch.AppCore.csproj" />
+    <ProjectReference Include="..\ElasticSearch.DAL\ElasticSearch.DAL.csproj" />
   </ItemGroup>
 
 </Project>
