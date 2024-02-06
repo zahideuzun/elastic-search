@@ -18,6 +18,9 @@ namespace ElasticSearch.AppCore.Mapping
 
             CreateMap<ProductFeature, ProductFeatureDto>();
             CreateMap<ProductFeatureDto, ProductFeature>();
+
+            CreateMap<ProductCreateDto, Product>()
+            .ForMember(dest => dest.Feature, act => act.MapFrom(src => src.Feature));
         }
     }
 }

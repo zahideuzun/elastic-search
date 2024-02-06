@@ -1,13 +1,13 @@
-﻿using ElasticSearch.AppCore.DTOs;
+﻿using ElasticSearch.API.Controllers.Base;
+using ElasticSearch.AppCore.DTOs;
 using ElasticSearch.BLL.Abstract;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ElasticSearch.API.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class ProductsController : ControllerBase
+
+    public class ProductsController : BaseController
     {
         private readonly IProductService _productService;
 
@@ -17,9 +17,21 @@ namespace ElasticSearch.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Save (ProductCreateDto request)
+        public async Task<IActionResult> Save(ProductCreateDto request)
         {
-            return Ok(await _productService.SaveAsync(request));
+            return CreateActionResult(await _productService.SaveAsync(request));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAll()
+        {
+            return CreateActionResult(await _productService.GetAllAsync());
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(string id)
+        {
+            return CreateActionResult(await _productService.GetByIdAsync(id));
         }
     }
 }

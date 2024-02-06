@@ -17,9 +17,9 @@ namespace ElasticSearch.AppCore.DTOs
 
 
         //static factory
-        public static ResponseDto<T> Success(T Data, HttpStatusCode status)
+        public static ResponseDto<T> Success(T data, HttpStatusCode status)
         {
-            return new ResponseDto<T> { Data = Data, Status = status };
+            return new ResponseDto<T> { Data = data, Status = status };
         }
 
         public static ResponseDto<T> Fail(List<string> errors, HttpStatusCode status)
@@ -27,5 +27,9 @@ namespace ElasticSearch.AppCore.DTOs
             return new ResponseDto<T> { Errors = errors, Status = status };
         }
 
+        public static ResponseDto<T> Fail(string error, HttpStatusCode status)
+        {
+            return new ResponseDto<T> { Errors = new List<string> { error}, Status = status };
+        }
     }
 }

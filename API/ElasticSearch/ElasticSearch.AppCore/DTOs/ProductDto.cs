@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ElasticSearch.AppCore.DTOs
 {
-    public record ProductDto(string Id, string Name, decimal Price, int Stock, ProductFeatureDto Feature)
+    public record ProductDto(string Id, string Name, decimal Price, int Stock, ProductFeatureDto? Feature)
     {
        
     }
