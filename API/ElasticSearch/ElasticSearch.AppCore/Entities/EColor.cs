@@ -1,4 +1,4 @@
-﻿namespace ElasticSearch.API.Models
+﻿namespace ElasticSearch.AppCore.Entities
 {
     public enum EColor
     {
