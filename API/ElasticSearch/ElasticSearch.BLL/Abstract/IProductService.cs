@@ -17,5 +17,9 @@ namespace ElasticSearch.BLL.Abstract
         public Task<ResponseDto<List<ProductDto>>> GetAllAsync();
 
         public Task<ResponseDto<ProductDto>> GetByIdAsync(string id);
+
+        public Task<ResponseDto<bool>> UpdateAsync(ProductUpdateDto updateProduct);
+
+        public Task<ResponseDto<bool>> DeleteAsync(string id);
     }
 }

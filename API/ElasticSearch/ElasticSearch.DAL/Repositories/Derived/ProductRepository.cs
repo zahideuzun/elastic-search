@@ -2,12 +2,7 @@
 using ElasticSearch.AppCore.Entities;
 using ElasticSearch.DAL.Repositories.Infrastructor;
 using Nest;
-using System;
-using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ElasticSearch.DAL.Repositories.Derived
 {
@@ -56,6 +51,19 @@ namespace ElasticSearch.DAL.Repositories.Derived
 
             response.Source.Id = response.Id;
             return response.Source;
+        }
+
+        public async Task<bool> UpdateAsync(ProductUpdateDto updateProduct)
+        {
+            var response = await _client.UpdateAsync<Product, ProductUpdateDto>(updateProduct.Id, x=>x.Index(indexName).Doc(updateProduct));
+
+            return response.IsValid;
+        }
+
+        public async Task<DeleteResponse> DeleteAsync(string id)
+        {
+            var response = await _client.DeleteAsync<Product>(id, x=>x.Index(indexName));
+            return response;
         }
     }
 }
