@@ -34,7 +34,10 @@ builder.Services.AddSingleton(mapper);
 
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<IECommerceService, ECommerceService>();
+builder.Services.AddScoped<IECommerceRepository, ECommerceRepository>();
 builder.Services.AddSingleton<IElasticClient, ElasticClient>();
+
 
 
 #endregion
