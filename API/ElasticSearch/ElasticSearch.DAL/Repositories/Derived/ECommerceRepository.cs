@@ -222,6 +222,27 @@ namespace ElasticSearch.DAL.Repositories.Derived
             return ExtensionsMethod.HandleSearchResponse(searchResponse);
         }
 
+        public async Task<ImmutableList<ECommerce>> MultiMatchQueryFullTextAsync(string name)
+        {
+            var searchResponse = await _client.SearchAsync<ECommerce>(s => s
+                .Index(indexName)
+                .Query(q => q
+                    .MultiMatch(m => m
+                        .Fields(f => f
+                            .Field(ff => ff.CustomerFullName)
+                            .Field(ff => ff.CustomerFirstName)
+                            .Field(ff => ff.CustomerLastName)
+                        )
+                        .Query(name)
+                    )
+                )
+            );
+
+            ExtensionsMethod.SetDocumentIds(searchResponse);
+            return ExtensionsMethod.HandleSearchResponse(searchResponse);
+        }
+
+
         public async Task<ImmutableList<ECommerce>> MatchBoolPrefixQueryFullTextAsync(string customerFullName)
         {
             var searchResponse = await _client.SearchAsync<ECommerce>(s => s
@@ -260,12 +281,11 @@ namespace ElasticSearch.DAL.Repositories.Derived
         {
             var searchResponse = await _client.SearchAsync<ECommerce>(s => s
                 .Index(indexName)
-                .Size(1000)
                 .Query(q => q
                     .Bool(b => b
                         .Must(mu => mu
                             .Term(t => t
-                                .Field(f => f.GeoipCityName)
+                                .Field("geoip.city_name")
                                 .Value(cityName)
                             )
                         )
@@ -283,7 +303,7 @@ namespace ElasticSearch.DAL.Repositories.Derived
                         )
                         .Filter(fi => fi
                             .Term(t => t
-                                .Field(f => f.Manufacturer.Suffix("keyword"))
+                                .Field("manufacturer.keyword")
                                 .Value(manufacturer)
                             )
                         )
@@ -295,6 +315,40 @@ namespace ElasticSearch.DAL.Repositories.Derived
 
             return ExtensionsMethod.HandleSearchResponse(searchResponse);
         }
+
+        public async Task<ImmutableList<ECommerce>> CompoundFullTextAndTermQueryAsync(string customerFullName)
+        {
+            var searchResponse = await _client.SearchAsync<ECommerce>(s => s
+                .Index(indexName)
+                .Query(q => q
+                    .Bool(b => b
+                        .Should(sh => sh
+                            .Match(m => m
+                                .Field(f => f.CustomerFullName)
+                                .Query(customerFullName)
+                            ),
+                            sh => sh
+                            .Prefix(p => p
+                                .Field(f => f.CustomerFullName.Suffix("keyword"))
+                                .Value(customerFullName)
+                            )
+                        )
+                    )
+                )
+            );
+
+            //var searchResponse = await _client.SearchAsync<ECommerce>(s => s
+            //    .Index(indexName)
+            //    .Query(q => q
+            //        .MatchPhrasePrefix(m => m
+            //            .Field(f => f.CustomerFullName)
+            //                .Query(customerFullName))));
+
+            ExtensionsMethod.SetDocumentIds(searchResponse);
+
+            return ExtensionsMethod.HandleSearchResponse(searchResponse);
+        }
+
 
     }
 }

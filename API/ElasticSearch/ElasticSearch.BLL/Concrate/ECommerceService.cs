@@ -76,6 +76,11 @@ namespace ElasticSearch.BLL.Concrate
             return await _repository.MatchQueryFullTextAsync(categoryName);
         }
 
+        public async Task<ImmutableList<ECommerce>> MultiMatchQueryFullText(string name)
+        {
+            return await _repository.MultiMatchQueryFullTextAsync(name);
+        }
+
         public async Task<ImmutableList<ECommerce>> MatchBoolPrefixQueryFullText(string customerFullName)
         {
             return await _repository.MatchBoolPrefixQueryFullTextAsync(customerFullName);
@@ -89,6 +94,11 @@ namespace ElasticSearch.BLL.Concrate
         public Task<ImmutableList<ECommerce>> CompoundQuery(string cityName, double taxfulTotalPrice, string category, string manufacturer)
         {
             return _repository.CompoundQueryAsync(cityName, taxfulTotalPrice, category, manufacturer);
+        }
+
+        public Task<ImmutableList<ECommerce>> CompoundFullTextAndTermQuery(string customerFullName)
+        {
+           return _repository.CompoundFullTextAndTermQueryAsync(customerFullName);
         }
     }
 

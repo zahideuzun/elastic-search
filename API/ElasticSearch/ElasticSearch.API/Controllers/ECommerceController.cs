@@ -81,6 +81,12 @@ namespace ElasticSearch.API.Controllers
         }
 
         [HttpGet]
+        public async Task<IActionResult> MultiMatchFullTextQuery(string name)
+        {
+            return Ok(await _eCommerceService.MultiMatchQueryFullText(name));
+        }
+
+        [HttpGet]
         public async Task<IActionResult> MatchBoolPrefixFullTextQuery(string customerFullName)
         {
             return Ok(await _eCommerceService.MatchBoolPrefixQueryFullText(customerFullName));
@@ -96,6 +102,12 @@ namespace ElasticSearch.API.Controllers
         public async Task<IActionResult> CompoundQuery(string cityName, double taxfulTotalPrice, string category, string manufacturer)
         {
             return Ok(await _eCommerceService.CompoundQuery(cityName, taxfulTotalPrice, category, manufacturer));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> CompoundFullTextAndPrefixQuery(string customerFullName)
+        {
+            return Ok(await _eCommerceService.CompoundFullTextAndTermQuery(customerFullName));
         }
     }
 }

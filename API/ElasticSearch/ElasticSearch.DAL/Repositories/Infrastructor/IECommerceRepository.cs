@@ -33,10 +33,14 @@ namespace ElasticSearch.DAL.Repositories.Infrastructor
 
         public Task<ImmutableList<ECommerce>> MatchQueryFullTextAsync(string categoryName);
 
+        public Task<ImmutableList<ECommerce>> MultiMatchQueryFullTextAsync(string name);
+
         public Task<ImmutableList<ECommerce>> MatchBoolPrefixQueryFullTextAsync(string customerFullName);
 
         public Task<ImmutableList<ECommerce>> MatchPhraseQueryFullTextAsync(string customerFullName);
 
         public Task<ImmutableList<ECommerce>> CompoundQueryAsync(string cityName, double taxfulTotalPrice, string category, string manufacturer);
+
+        public Task<ImmutableList<ECommerce>> CompoundFullTextAndTermQueryAsync(string customerFullName);
     }
 }

@@ -31,12 +31,6 @@ namespace ElasticSearch.AppCore.Entities.ECommerceModel
         [PropertyName("taxful_total_price")]
         public double TaxfulTotalPrice { get; set; }
 
-        [PropertyName("geoip.city_name")]
-        public string? GeoipCityName { get; set; } 
-
-        [PropertyName("manufacturer")]
-        public string? Manufacturer { get; set; } 
-
         [PropertyName("order_id")]
         public int OrderId { get; set; }
 

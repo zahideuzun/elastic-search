@@ -32,10 +32,14 @@ namespace ElasticSearch.BLL.Abstract
 
         public Task<ImmutableList<ECommerce>> MatchQueryFullText(string categoryName);
 
+        public Task<ImmutableList<ECommerce>> MultiMatchQueryFullText(string name);
+
         public Task<ImmutableList<ECommerce>> MatchBoolPrefixQueryFullText(string customerFullName);
 
         public Task<ImmutableList<ECommerce>> MatchPhraseQueryFullText(string customerFullName);
 
         public Task<ImmutableList<ECommerce>> CompoundQuery(string cityName, double taxfulTotalPrice, string category, string manufacturer);
+
+        public Task<ImmutableList<ECommerce>> CompoundFullTextAndTermQuery(string customerFullName);
     }
 }
