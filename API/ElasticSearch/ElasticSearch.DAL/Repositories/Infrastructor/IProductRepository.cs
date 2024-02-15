@@ -1,5 +1,5 @@
-﻿using ElasticSearch.AppCore.DTOs;
-using ElasticSearch.AppCore.Entities;
+﻿using ElasticSearch.AppCore.DTOs.ProductDTOs;
+using ElasticSearch.AppCore.Entities.Product.Product;
 using Nest;
 using System.Collections.Immutable;
 

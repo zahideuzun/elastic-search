@@ -5,7 +5,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ElasticSearch.AppCore.DTOs
+namespace ElasticSearch.AppCore.DTOs.ProductDTOs
 {
     public record ResponseDto<T>
     {
@@ -29,7 +29,7 @@ namespace ElasticSearch.AppCore.DTOs
 
         public static ResponseDto<T> Fail(string error, HttpStatusCode status)
         {
-            return new ResponseDto<T> { Errors = new List<string> { error}, Status = status };
+            return new ResponseDto<T> { Errors = new List<string> { error }, Status = status };
         }
     }
 }

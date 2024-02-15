@@ -1,4 +1,4 @@
-﻿using ElasticSearch.AppCore.DTOs;
+﻿using ElasticSearch.AppCore.DTOs.ProductDTOs;
 using ElasticSearch.AppCore.Entities;
 using ElasticSearch.DAL.Repositories.Infrastructor;
 using System;

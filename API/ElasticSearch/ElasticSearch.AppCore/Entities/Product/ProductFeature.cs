@@ -1,6 +1,4 @@
-﻿
-
-namespace ElasticSearch.AppCore.Entities
+﻿namespace ElasticSearch.AppCore.Entities.Product.Product
 {
     public class ProductFeature
     {
