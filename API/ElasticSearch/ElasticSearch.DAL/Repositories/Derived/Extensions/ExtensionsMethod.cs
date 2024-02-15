@@ -1,11 +1,7 @@
-﻿using ElasticSearch.AppCore.Entities.ECommerceModel;
+﻿
+using ElasticSearch.AppCore.Entities.ECommerceModel;
 using Nest;
-using System;
-using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ElasticSearch.DAL.Repositories.Derived.Extensions
 {
@@ -23,5 +19,6 @@ namespace ElasticSearch.DAL.Repositories.Derived.Extensions
 
             return searchResponse.Documents.ToImmutableList();
         }
+
     }
 }

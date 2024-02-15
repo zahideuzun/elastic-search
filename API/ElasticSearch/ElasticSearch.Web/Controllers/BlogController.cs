@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using ElasticSearch.AppCore.DTOs.BlogDTOs;
+using ElasticSearch.AppCore.Entities.Blog;
 using ElasticSearch.BLL.Abstract;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,12 +15,28 @@ namespace ElasticSearch.WEB.Controllers
             _blogService = blogService;
             _mapper = mapper;
         }
+
+        [HttpGet]
         public IActionResult Save()
         {
             return View(new BlogCreateDto());
         }
 
-        [HttpPost]
+        
+        public IActionResult Search()
+        {
+            return View(new List<Blog>());
+        }
+
+		[HttpPost]
+		public async Task<IActionResult> Search(string searchText)
+		{
+            var blogList = await _blogService.Search(searchText);
+            
+			return View(blogList);
+		}
+
+		[HttpPost]
         public async Task<IActionResult> Save(BlogCreateDto model)
         {
             if (!ModelState.IsValid)
@@ -27,7 +44,7 @@ namespace ElasticSearch.WEB.Controllers
                 return View("Save", model);
             }
 
-            var savedBlog = await _blogService.SaveAsync(model);
+            var savedBlog = await _blogService.Save(model);
 
             if (savedBlog)
             {

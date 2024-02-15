@@ -10,6 +10,8 @@ namespace ElasticSearch.BLL.Abstract
 {
     public interface IBlogService
     {
-        public Task<bool> SaveAsync(BlogCreateDto newBlog);
+        public Task<bool> Save(BlogCreateDto newBlog);
+
+        public Task<List<Blog>> Search(string searchText);
     }
 }

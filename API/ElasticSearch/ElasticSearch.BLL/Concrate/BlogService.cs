@@ -21,13 +21,18 @@ namespace ElasticSearch.BLL.Concrate
             _blogRepository = blogRepository;
             _mapper = mapper;
         }
-        public async Task<bool> SaveAsync(BlogCreateDto newBlog)
+        public async Task<bool> Save(BlogCreateDto newBlog)
         {
             var blog = _mapper.Map<Blog>(newBlog);
 
             var isCreated= await _blogRepository.SaveAsync(blog);
 
             return isCreated != null;
+        }
+
+        public Task<List<Blog>> Search(string searchText)
+        {
+            return _blogRepository.SearchAsync(searchText);
         }
     }
 }

@@ -11,6 +11,6 @@ namespace ElasticSearch.DAL.Repositories.Infrastructor
     {
         public Task<Blog?> SaveAsync(Blog newBlog);
 
-        
+        public Task<List<Blog>> SearchAsync(string searchText);
     }
 }

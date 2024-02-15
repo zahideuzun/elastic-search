@@ -33,12 +33,13 @@ namespace ElasticSearch.AppCore.Mapping
                 .ForMember(dest => dest.Created, opt => opt.Ignore());
 
 
+			//CreateMap<Blog, BlogDto>();
+			//CreateMap<BlogDto, Blog>();
 
 
+			#endregion
 
-            #endregion
 
-
-        }
+		}
     }
 }

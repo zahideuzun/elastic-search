@@ -2,7 +2,6 @@ using AutoMapper;
 using ElasticSearch.AppCore.Mapping;
 using ElasticSearch.BLL.Abstract;
 using ElasticSearch.BLL.Concrate;
-using ElasticSearch.DAL.Repositories;
 using ElasticSearch.DAL.Repositories.Derived;
 using ElasticSearch.DAL.Repositories.Infrastructor;
 using ElasticSearch.WEB.Extensions;
