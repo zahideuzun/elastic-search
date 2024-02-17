@@ -32,11 +32,6 @@ namespace ElasticSearch.AppCore.Mapping
                 .ForMember(dest => dest.UserId, opt => opt.MapFrom(src => Guid.NewGuid())) 
                 .ForMember(dest => dest.Created, opt => opt.Ignore());
 
-
-			//CreateMap<Blog, BlogDto>();
-			//CreateMap<BlogDto, Blog>();
-
-
 			#endregion
 
 

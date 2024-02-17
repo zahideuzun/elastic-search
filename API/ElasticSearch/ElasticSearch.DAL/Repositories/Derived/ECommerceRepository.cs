@@ -358,7 +358,9 @@ namespace ElasticSearch.DAL.Repositories.Derived
 
 		#endregion
 
+		#region WEB-UI
 
+		
 		public async Task<(List<ECommerce> list, long count)> SearchAsync(ECommerceSearchDto eCommerceDtoFilter, int page, int pageSize)
 		{
 			List<Func<QueryContainerDescriptor<ECommerce>, QueryContainer>> listQuery = new List<Func<QueryContainerDescriptor<ECommerce>, QueryContainer>>();
@@ -435,6 +437,8 @@ namespace ElasticSearch.DAL.Repositories.Derived
 
 			return (list: searchResponse.Documents.ToList(), searchResponse.Total);
 		}
+
+		#endregion
 
 	}
 }
