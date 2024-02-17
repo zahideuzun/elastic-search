@@ -28,7 +28,10 @@ namespace ElasticSearch.AppCore.Entities.ECommerceModel
         [PropertyName("category")]
         public string[] Category { get; set; } = null!;
 
-        [PropertyName("taxful_total_price")]
+		[PropertyName("customer_gender")]
+		public string Gender { get; set; } = null!;
+
+		[PropertyName("taxful_total_price")]
         public double TaxfulTotalPrice { get; set; }
 
         [PropertyName("order_id")]

@@ -1,5 +1,5 @@
 ﻿using ElasticSearch.API.Controllers.Base;
-using ElasticSearch.AppCore.DTOs;
+using ElasticSearch.AppCore.DTOs.ProductDTOs;
 using ElasticSearch.BLL.Abstract;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

@@ -1,4 +1,5 @@
 ﻿
+using ElasticSearch.AppCore.DTOs.ECommerceDTOs;
 using ElasticSearch.AppCore.Entities.ECommerceModel;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,9 @@ namespace ElasticSearch.BLL.Abstract
 {
     public interface IECommerceService
     {
+        #region API
+
+        
         public Task<ImmutableList<ECommerce>> TermQuery(string customerFirstName);
 
         public Task<ImmutableList<ECommerce>> TermsQuery(List<string> customerFirstNameList);
@@ -41,5 +45,13 @@ namespace ElasticSearch.BLL.Abstract
         public Task<ImmutableList<ECommerce>> CompoundQuery(string cityName, double taxfulTotalPrice, string category, string manufacturer);
 
         public Task<ImmutableList<ECommerce>> CompoundFullTextAndTermQuery(string customerFullName);
-    }
+
+		#endregion
+
+		#region WEB-UI
+
+		public Task<(List<ECommerceDto>, long totalCount, long pageLinkCount)> SearchAsync(ECommerceSearchDto filter, int page, int pageSize);
+
+		#endregion
+	}
 }

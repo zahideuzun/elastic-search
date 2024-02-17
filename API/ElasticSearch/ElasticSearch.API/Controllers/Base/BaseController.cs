@@ -1,4 +1,4 @@
-﻿using ElasticSearch.AppCore.DTOs;
+﻿using ElasticSearch.AppCore.DTOs.ProductDTOs;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;

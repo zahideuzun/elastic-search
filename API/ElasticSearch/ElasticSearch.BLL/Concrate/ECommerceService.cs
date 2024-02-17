@@ -1,4 +1,5 @@
-﻿using ElasticSearch.AppCore.Entities.ECommerceModel;
+﻿using ElasticSearch.AppCore.DTOs.ECommerceDTOs;
+using ElasticSearch.AppCore.Entities.ECommerceModel;
 using ElasticSearch.BLL.Abstract;
 using ElasticSearch.DAL.Repositories.Infrastructor;
 using System;
@@ -20,6 +21,9 @@ namespace ElasticSearch.BLL.Concrate
             _repository = repository;
         }
 
+        #region API
+
+        
         public async Task<ImmutableList<ECommerce>> TermQuery(string customerFirstName)
         {
             
@@ -100,6 +104,49 @@ namespace ElasticSearch.BLL.Concrate
         {
            return _repository.CompoundFullTextAndTermQueryAsync(customerFullName);
         }
-    }
+
+
+
+		#endregion
+
+		#region WEB-UI
+
+		public async Task<(List<ECommerceDto>, long totalCount, long pageLinkCount)> SearchAsync(ECommerceSearchDto filter, int page, int pageSize)
+		{
+			var (eCommerceList, totalCount) = await _repository.SearchAsync(filter, page, pageSize);
+
+            var pageLinkCountCalculate = totalCount % pageSize;
+
+            long pageLinkCount = 0;
+
+            if (pageLinkCount ==0)
+            {
+                pageLinkCount = totalCount / pageSize;
+            }
+            else
+            {
+                pageLinkCount =(totalCount / pageSize) + 1;
+            }
+
+            var eCommerceListDto = eCommerceList.Select(x=> new ECommerceDto()
+            {
+                Category = String.Join(",", x.Category),
+                CustomerFirstName = x.CustomerFirstName,
+                CustomerLastName = x.CustomerLastName,
+                CustomerFullName = x.CustomerFullName,
+                OrderDate=x.OrderDate.ToShortDateString(),
+                Gender= x.Gender.ToLower(),
+                Id=x.Id,
+                OrderId=x.OrderId,
+                TaxfulTotalPrice=x.TaxfulTotalPrice,
+
+            }).ToList();
+
+            return (eCommerceListDto, totalCount, pageLinkCount);
+		}
+
+
+		#endregion
+	}
 
 }
