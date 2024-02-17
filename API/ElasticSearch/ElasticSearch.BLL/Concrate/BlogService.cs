@@ -30,9 +30,21 @@ namespace ElasticSearch.BLL.Concrate
             return isCreated != null;
         }
 
-        public Task<List<Blog>> Search(string searchText)
+        public async Task<List<BlogDto>> Search(string searchText)
         {
-            return _blogRepository.SearchAsync(searchText);
-        }
+            var blogList = await _blogRepository.SearchAsync(searchText);
+
+			var blogViewModels = blogList.Select(blog => new BlogDto
+			{
+				Id = blog.Id,
+				Title = blog.Title,
+				Content = blog.Content,
+				Tags = String.Join(",", blog.Tags), 
+				UserId = blog.UserId.ToString(),
+				Created = blog.Created.ToShortDateString() 
+			}).ToList();
+
+            return blogViewModels;
+		}
     }
 }

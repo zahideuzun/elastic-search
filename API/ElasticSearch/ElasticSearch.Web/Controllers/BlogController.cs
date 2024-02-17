@@ -22,15 +22,17 @@ namespace ElasticSearch.WEB.Controllers
             return View(new BlogCreateDto());
         }
 
-        
-        public IActionResult Search()
-        {
-            return View(new List<Blog>());
-        }
+		[HttpGet]
+		public async Task<IActionResult> Search()
+		{
+			var blogList = await _blogService.Search(string.Empty);
+			return View(blogList);
+		}
 
 		[HttpPost]
 		public async Task<IActionResult> Search(string searchText)
 		{
+            ViewBag.SearchText = searchText;
             var blogList = await _blogService.Search(searchText);
             
 			return View(blogList);

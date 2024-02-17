@@ -1,4 +1,5 @@
 ﻿
+using ElasticSearch.AppCore.DTOs.ECommerceDTOs;
 using ElasticSearch.AppCore.Entities.ECommerceModel;
 using Nest;
 using System;
@@ -10,8 +11,11 @@ using System.Threading.Tasks;
 
 namespace ElasticSearch.DAL.Repositories.Infrastructor
 {
-    public interface IECommerceRepository 
-    {
+    public interface IECommerceRepository
+	{
+        #region API
+
+        
         public Task<ImmutableList<ECommerce>> TermQueryAsync(string customerFirstName);
 
         public Task<ImmutableList<ECommerce>> TermsQueryAsync(List<string> customerFirstNameList);
@@ -42,5 +46,12 @@ namespace ElasticSearch.DAL.Repositories.Infrastructor
         public Task<ImmutableList<ECommerce>> CompoundQueryAsync(string cityName, double taxfulTotalPrice, string category, string manufacturer);
 
         public Task<ImmutableList<ECommerce>> CompoundFullTextAndTermQueryAsync(string customerFullName);
-    }
+
+        #endregion
+
+        #region Web-UI
+
+        public Task<(List<ECommerce> list, long count)> SearchAsync(ECommerceSearchDto filter, int page, int pageSize);
+		#endregion
+	}
 }

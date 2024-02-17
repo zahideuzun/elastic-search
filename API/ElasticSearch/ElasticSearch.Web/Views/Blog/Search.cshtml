@@ -1,7 +1,8 @@
-﻿﻿@{
+﻿@using ElasticSearch.AppCore.DTOs.BlogDTOs
+@{
 	ViewData["Title"] = "Search";
 }
-@*@model List<Blog>*@
+@model List<BlogDto>
 <div class="container">
 	<div class="col-md-10 offset-md-1">
 
@@ -9,15 +10,15 @@
 			<div class="mb-3">
 
 
-				<label>SearchAsync(Title,Content)</label>
-				<input value="@ViewBag.searchText" name="searchText" class="form-control" />
+				<label>Search (Title,Content)</label>
+				<input value="@ViewBag.SearchText" name="searchText" class="form-control" />
 			</div>
 
 			<button type="submit">Search</button>
 		</form>
 
 
-		@*@if (!Model.Any())
+		@if (!Model.Any())
 		{
 			<div class="alert alert-info">sonuç bulunamamıştır.</div>
 		}
@@ -61,7 +62,7 @@
 			</table>
 		}
 
-	</div>*@
+	</div>
 
 
 

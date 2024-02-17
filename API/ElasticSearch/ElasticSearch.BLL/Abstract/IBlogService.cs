@@ -1,17 +1,14 @@
 ﻿using ElasticSearch.AppCore.DTOs.BlogDTOs;
-using ElasticSearch.AppCore.Entities.Blog;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using ElasticSearch.AppCore.DTOs.ECommerceDTOs;
+using ElasticSearch.AppCore.Entities.ECommerceModel;
 
 namespace ElasticSearch.BLL.Abstract
 {
-    public interface IBlogService
+	public interface IBlogService
     {
         public Task<bool> Save(BlogCreateDto newBlog);
 
-        public Task<List<Blog>> Search(string searchText);
-    }
+        public Task<List<BlogDto>> Search(string searchText);
+
+	}
 }

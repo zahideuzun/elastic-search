@@ -28,6 +28,8 @@ builder.Services.AddSingleton(mapper);
 #region IoC
 builder.Services.AddScoped<IBlogRepository, BlogRepository>();
 builder.Services.AddScoped<IBlogService, BlogService>();
+builder.Services.AddScoped<IECommerceRepository, ECommerceRepository>();
+builder.Services.AddScoped<IECommerceService, ECommerceService>();
 builder.Services.AddSingleton<IElasticClient, ElasticClient>();
 #endregion
 

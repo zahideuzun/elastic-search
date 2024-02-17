@@ -26,32 +26,35 @@ namespace ElasticSearch.DAL.Repositories.Derived
             return newBlog;
         }
 
-        public async Task<List<Blog>> SearchAsync(string searchText)
-        {
-            //title ve contentine gore arama yapacagim. full text. 
+		public async Task<List<Blog>> SearchAsync(string searchText)
+		{
+			var query = !string.IsNullOrWhiteSpace(searchText)
+				? (Func<QueryContainerDescriptor<Blog>, QueryContainer>)(q => q
+					.Bool(b => b
+						.Should(sh => sh
+							.Match(m => m
+								.Field(f => f.Content)
+								.Query(searchText)
+							),
+							sh => sh
+							.MatchBoolPrefix(p => p
+								.Field(f => f.Title)
+								.Query(searchText)
+							)
+						)
+					))
+				: q => q.MatchAll(); 
 
-            var searchResponse = await _client.SearchAsync<Blog>(s => s
-                .Index(indexName)
-                .Query(q => q
-                    .Bool(b => b
-                        .Should(sh => sh
-                            .Match(m => m
-                                .Field(f => f.Content)
-                                .Query(searchText)
-                            ),
-                            sh => sh
-                            .MatchBoolPrefix(p => p
-                                .Field(f => f.Title)
-                                .Query(searchText)
-                            )
-                        )
-                    )
-                )
-            );
+			var searchResponse = await _client.SearchAsync<Blog>(s => s
+				.Index(indexName)
+				.Query(query)
+			);
 
-            foreach (var hit in searchResponse.Hits) hit.Source.Id = hit.Id;
+			foreach (var hit in searchResponse.Hits) hit.Source.Id = hit.Id;
 
-            return searchResponse.Documents.ToList();
-        }
-    }
+
+			return searchResponse.Documents.ToList();
+		}
+
+	}
 }
