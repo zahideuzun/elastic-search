@@ -1,14 +1,8 @@
 ﻿using Nest;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 
 namespace ElasticSearch.AppCore.Entities.ECommerceModel
 {
-    public class ECommerce
+	public class ECommerce
     {
         //[JsonPropertyName("_id")]
         //elasticsearch.client library'nin property tanimlama sekli

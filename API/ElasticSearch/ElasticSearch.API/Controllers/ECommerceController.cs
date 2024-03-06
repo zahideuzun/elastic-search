@@ -1,17 +1,18 @@
 ﻿using ElasticSearch.BLL.Abstract;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ElasticSearch.API.Controllers
 {
-    [Route("api/[controller]/[action]")]
+	[Route("api/[controller]/[action]")]
     [ApiController]
     public class ECommerceController : ControllerBase
     {
         private readonly IECommerceService _eCommerceService;
-        public ECommerceController(IECommerceService eCommerceService)
+        private readonly ILogger<ECommerceController> _logger;
+        public ECommerceController(IECommerceService eCommerceService, ILogger<ECommerceController> logger)
         {
             _eCommerceService = eCommerceService;
+            _logger = logger;
         }
 
         [HttpGet]
@@ -53,7 +54,8 @@ namespace ElasticSearch.API.Controllers
         [HttpGet]
         public async Task<IActionResult> MatchAllQuery()
         {
-            return Ok(await _eCommerceService.MatchAllQuery());
+			_logger.LogInformation("MatchAllQuery log");
+			return Ok(await _eCommerceService.MatchAllQuery());
         }
 
         [HttpGet]

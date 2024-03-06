@@ -2,17 +2,11 @@
 using ElasticSearch.AppCore.Entities.ECommerceModel;
 using ElasticSearch.BLL.Abstract;
 using ElasticSearch.DAL.Repositories.Infrastructor;
-using System;
-using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ElasticSearch.BLL.Concrate
 {
-    public class ECommerceService : IECommerceService
+	public class ECommerceService : IECommerceService
     {
         private readonly IECommerceRepository _repository;
 
@@ -115,20 +109,23 @@ namespace ElasticSearch.BLL.Concrate
 		{
 			var (eCommerceList, totalCount) = await _repository.SearchAsync(filter, page, pageSize);
 
-            var pageLinkCountCalculate = totalCount % pageSize;
+			#region Pagination
+			var pageLinkCountCalculate = totalCount % pageSize;
 
-            long pageLinkCount = 0;
+			long pageLinkCount = 0;
 
-            if (pageLinkCount ==0)
-            {
-                pageLinkCount = totalCount / pageSize;
-            }
-            else
-            {
-                pageLinkCount =(totalCount / pageSize) + 1;
-            }
+			if (pageLinkCount == 0)
+			{
+				pageLinkCount = totalCount / pageSize;
+			}
+			else
+			{
+				pageLinkCount = (totalCount / pageSize) + 1;
+			}
+			#endregion
 
-            var eCommerceListDto = eCommerceList.Select(x=> new ECommerceDto()
+
+			var eCommerceListDto = eCommerceList.Select(x=> new ECommerceDto()
             {
                 Category = String.Join(",", x.Category),
                 CustomerFirstName = x.CustomerFirstName,

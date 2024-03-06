@@ -1,14 +1,9 @@
-﻿using ElasticSearch.AppCore.Entities.ECommerceModel;
+﻿using ElasticSearch.AppCore.DTOs.ECommerceDTOs;
+using ElasticSearch.AppCore.Entities.ECommerceModel;
+using ElasticSearch.DAL.Repositories.Derived.Extensions;
 using ElasticSearch.DAL.Repositories.Infrastructor;
 using Nest;
-using ElasticSearch.DAL.Repositories.Derived.Extensions;
-using System;
-using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ElasticSearch.AppCore.DTOs.ECommerceDTOs;
 
 namespace ElasticSearch.DAL.Repositories.Derived
 {
@@ -25,7 +20,7 @@ namespace ElasticSearch.DAL.Repositories.Derived
 		#region API
 
 
-
+		//Sonya, sonya
 		public async Task<ImmutableList<ECommerce>> TermQueryAsync(string customerFirstName)
 		{
 			var searchResponse = await _client.SearchAsync<ECommerce>(s => s
@@ -44,6 +39,7 @@ namespace ElasticSearch.DAL.Repositories.Derived
 		}
 
 		//birden fazla first name aratabilirim
+		//Abigail, George
 		public async Task<ImmutableList<ECommerce>> TermsQueryAsync(List<string> customerFirstNameList)
 		{
 			var searchResponse = await _client.SearchAsync<ECommerce>(s => s
@@ -61,8 +57,8 @@ namespace ElasticSearch.DAL.Repositories.Derived
 			return ExtensionsMethod.HandleSearchResponse(searchResponse);
 		}
 
-
 		//yazdigimiz kelime ile baslayanlari getirir. startWith'e benzer.
+		//Geor, Son
 		public async Task<ImmutableList<ECommerce>> PrefixQueryAsync(string customerFullName)
 		{
 			var searchResponse = await _client.SearchAsync<ECommerce>(s => s
@@ -173,6 +169,8 @@ namespace ElasticSearch.DAL.Repositories.Derived
 			return ExtensionsMethod.HandleSearchResponse(searchResponse);
 		}
 
+		//Eddie*, *Perkins
+		//Edd?e
 		public async Task<ImmutableList<ECommerce>> WildCardQueryAsync(string customerFullName)
 		{
 			var searchResponse = await _client.SearchAsync<ECommerce>(s => s
@@ -188,6 +186,7 @@ namespace ElasticSearch.DAL.Repositories.Derived
 			return ExtensionsMethod.HandleSearchResponse(searchResponse);
 		}
 
+		//Abigail, George
 		public async Task<ImmutableList<ECommerce>> FuzzyQueryAsync(string customerFirstName)
 		{
 			//fuzzines degerini otomatik ayarlarsam kelime uzunluguna göre default olarak ayarliyor.
@@ -218,6 +217,7 @@ namespace ElasticSearch.DAL.Repositories.Derived
 					.Match(m => m
 						.Field(f => f.Category)
 						.Query(categoryName)
+						//.Operator(Operator.And)
 					)
 				)
 			);
@@ -247,7 +247,7 @@ namespace ElasticSearch.DAL.Repositories.Derived
 			return ExtensionsMethod.HandleSearchResponse(searchResponse);
 		}
 
-
+		//Sultan Al Mor.. 
 		public async Task<ImmutableList<ECommerce>> MatchBoolPrefixQueryFullTextAsync(string customerFullName)
 		{
 			var searchResponse = await _client.SearchAsync<ECommerce>(s => s
@@ -265,6 +265,7 @@ namespace ElasticSearch.DAL.Repositories.Derived
 			return ExtensionsMethod.HandleSearchResponse(searchResponse);
 		}
 
+		//Sultan Al Moran , Al Sultan Moran
 		public async Task<ImmutableList<ECommerce>> MatchPhraseQueryFullTextAsync(string customerFullName)
 		{
 			var searchResponse = await _client.SearchAsync<ECommerce>(s => s
@@ -282,6 +283,7 @@ namespace ElasticSearch.DAL.Repositories.Derived
 			return ExtensionsMethod.HandleSearchResponse(searchResponse);
 		}
 
+		//New York, 100, Women's Clothing, Tigress Enterprises
 		public async Task<ImmutableList<ECommerce>> CompoundQueryAsync(string cityName, double taxfulTotalPrice, string category, string manufacturer)
 		{
 			var searchResponse = await _client.SearchAsync<ECommerce>(s => s
@@ -321,6 +323,8 @@ namespace ElasticSearch.DAL.Repositories.Derived
 			return ExtensionsMethod.HandleSearchResponse(searchResponse);
 		}
 
+
+		//Jason Mccarthy , Jas
 		public async Task<ImmutableList<ECommerce>> CompoundFullTextAndTermQueryAsync(string customerFullName)
 		{
 			var searchResponse = await _client.SearchAsync<ECommerce>(s => s

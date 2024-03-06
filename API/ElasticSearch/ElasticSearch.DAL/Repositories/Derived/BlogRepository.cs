@@ -4,7 +4,7 @@ using Nest;
 
 namespace ElasticSearch.DAL.Repositories.Derived
 {
-    public class BlogRepository : IBlogRepository
+	public class BlogRepository : IBlogRepository
     {
         private readonly IElasticClient _client;
         private const string indexName = "blog";
@@ -26,6 +26,8 @@ namespace ElasticSearch.DAL.Repositories.Derived
             return newBlog;
         }
 
+		//.net 8 ile gelen yenilikler -> title yenilik aratırsam da yenilikleri tamamlayıp bulsun istediğim için match bool prefix.
+		//eğer contentte de öbek şeklinde arama yapmak istersem match phrase kullanmalıyım.
 		public async Task<List<Blog>> SearchAsync(string searchText)
 		{
 			var query = !string.IsNullOrWhiteSpace(searchText)

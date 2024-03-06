@@ -1,16 +1,10 @@
-﻿
-using ElasticSearch.AppCore.DTOs.ECommerceDTOs;
+﻿using ElasticSearch.AppCore.DTOs.ECommerceDTOs;
 using ElasticSearch.AppCore.Entities.ECommerceModel;
-using System;
-using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ElasticSearch.BLL.Abstract
 {
-    public interface IECommerceService
+	public interface IECommerceService
     {
         #region API
 
