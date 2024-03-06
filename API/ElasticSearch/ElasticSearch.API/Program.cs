@@ -5,11 +5,17 @@ using ElasticSearch.BLL.Abstract;
 using ElasticSearch.BLL.Concrate;
 using ElasticSearch.DAL.Repositories.Derived;
 using ElasticSearch.DAL.Repositories.Infrastructor;
-using Microsoft.AspNetCore.DataProtection.KeyManagement;
-using Microsoft.AspNetCore.Identity;
 using Nest;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Host.UseSerilog(Logging.ConfigureLogger);
+
+builder.Configuration
+    .AddJsonFile($"appsettings.json", optional: false, reloadOnChange: true)
+    .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true, reloadOnChange: true);
+
 
 // Add services to the container.
 
@@ -18,6 +24,10 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddElastic(builder.Configuration);
+
+
+
+
 
 #region MappingConfiguration
 

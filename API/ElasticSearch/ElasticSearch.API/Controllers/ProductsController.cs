@@ -1,13 +1,12 @@
 ﻿using ElasticSearch.API.Controllers.Base;
 using ElasticSearch.AppCore.DTOs.ProductDTOs;
 using ElasticSearch.BLL.Abstract;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ElasticSearch.API.Controllers
 {
 
-    public class ProductsController : BaseController
+	public class ProductsController : BaseController
     {
         private readonly IProductService _productService;
 

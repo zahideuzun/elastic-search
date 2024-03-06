@@ -1,11 +1,10 @@
-﻿
-using ElasticSearch.AppCore.Entities.ECommerceModel;
+﻿using ElasticSearch.AppCore.Entities.ECommerceModel;
 using Nest;
 using System.Collections.Immutable;
 
 namespace ElasticSearch.DAL.Repositories.Derived.Extensions
 {
-    public static class ExtensionsMethod
+	public static class ExtensionsMethod
     {
         public static void SetDocumentIds(ISearchResponse<ECommerce> searchResponse)
         {

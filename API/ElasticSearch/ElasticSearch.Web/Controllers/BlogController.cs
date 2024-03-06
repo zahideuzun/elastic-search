@@ -1,12 +1,11 @@
 ﻿using AutoMapper;
 using ElasticSearch.AppCore.DTOs.BlogDTOs;
-using ElasticSearch.AppCore.Entities.Blog;
 using ElasticSearch.BLL.Abstract;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ElasticSearch.WEB.Controllers
 {
-    public class BlogController : Controller
+	public class BlogController : Controller
     {
         private readonly IBlogService _blogService;
         private readonly IMapper _mapper;

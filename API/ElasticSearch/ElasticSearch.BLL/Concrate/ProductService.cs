@@ -5,13 +5,12 @@ using ElasticSearch.BLL.Abstract;
 using ElasticSearch.DAL.Repositories.Infrastructor;
 using Microsoft.Extensions.Logging;
 using Nest;
-using System.Collections.Immutable;
 using System.Net;
 
 
 namespace ElasticSearch.BLL.Concrate
 {
-    public class ProductService : IProductService
+	public class ProductService : IProductService
     {
         private readonly IProductRepository _productRepository;
         private readonly IMapper _mapper;

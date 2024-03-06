@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Net;
 
 namespace ElasticSearch.AppCore.DTOs.ProductDTOs
 {
-    public record ResponseDto<T>
+	public record ResponseDto<T>
     {
         public T? Data { get; set; }
 
