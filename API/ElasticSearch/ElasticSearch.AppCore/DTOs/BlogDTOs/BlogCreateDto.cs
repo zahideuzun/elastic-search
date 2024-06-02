@@ -11,7 +11,5 @@ namespace ElasticSearch.AppCore.DTOs.BlogDTOs
         public string Content { get; set; } = null!;
 
         public string? Tags { get; set; } 
-
-       
     }
 }
